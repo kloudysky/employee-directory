@@ -1,3 +1,4 @@
+import { __prod__ } from "./constants";
 import "reflect-metadata";
 import { createConnection } from "typeorm";
 import { Employee } from "./entities/Employee";
@@ -8,8 +9,8 @@ const main = async () => {
     database: "empdir",
     username: "postgres",
     password: "postgres",
-    logging: true,
-    synchronize: true,
+    logging: !__prod__,
+    synchronize: !__prod__,
     entities: [Employee],
   });
 };
