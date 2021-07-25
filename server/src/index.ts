@@ -8,7 +8,9 @@ import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 
 const main = async () => {
-  const conn = createConnection({
+  const app = express();
+
+  await createConnection({
     type: "postgres",
     database: "empdir",
     username: "postgres",
@@ -18,14 +20,15 @@ const main = async () => {
     entities: [Employee],
   });
 
-  const app = express();
-
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
       resolvers: [EmployeeResolver],
       validate: false,
     }),
+    context: ({ req, res }) => ({ req, res }),
   });
+
+  await apolloServer.start();
 
   apolloServer.applyMiddleware({ app });
 

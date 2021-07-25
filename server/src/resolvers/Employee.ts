@@ -4,7 +4,7 @@ import { Query, Resolver } from "type-graphql";
 @Resolver()
 export class EmployeeResolver {
   @Query(() => [Employee])
-  async employees(): Promise<Employee[]> {
+  employees(): Promise<Employee[]> {
     return Employee.find();
   }
 }
