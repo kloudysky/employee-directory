@@ -27,6 +27,8 @@ const main = async () => {
     }),
   });
 
+  apolloServer.applyMiddleware({ app });
+
   app.listen(9999, () => {
     console.log("server started on port localhost:9999");
   });
