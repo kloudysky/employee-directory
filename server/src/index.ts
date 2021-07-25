@@ -1,5 +1,6 @@
 import "reflect-metadata";
 import { createConnection } from "typeorm";
+import { Employee } from "./entities/Employee";
 
 const main = async () => {
   const conn = createConnection({
@@ -9,7 +10,7 @@ const main = async () => {
     password: "postgres",
     logging: true,
     synchronize: true,
-    entities: [],
+    entities: [Employee],
   });
 };
 
