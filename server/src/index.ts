@@ -1,8 +1,11 @@
+import { EmployeeResolver } from "./resolvers/Employee";
 import { __prod__ } from "./constants";
 import "reflect-metadata";
 import { createConnection } from "typeorm";
 import { Employee } from "./entities/Employee";
 import express from "express";
+import { ApolloServer } from "apollo-server-express";
+import { buildSchema } from "type-graphql";
 
 const main = async () => {
   const conn = createConnection({
@@ -17,8 +20,11 @@ const main = async () => {
 
   const app = express();
 
-  app.get("/", (_, res) => {
-    res.send("hello world");
+  const apolloServer = new ApolloServer({
+    schema: await buildSchema({
+      resolvers: [EmployeeResolver],
+      validate: false,
+    }),
   });
 
   app.listen(9999, () => {
