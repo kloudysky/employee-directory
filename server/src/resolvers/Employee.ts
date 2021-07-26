@@ -1,5 +1,13 @@
 import { Employee } from "./../entities/Employee";
-import { Arg, Field, InputType, Mutation, Query, Resolver } from "type-graphql";
+import {
+  Arg,
+  Field,
+  InputType,
+  Int,
+  Mutation,
+  Query,
+  Resolver,
+} from "type-graphql";
 
 @InputType()
 class EmployeeInput {
@@ -15,6 +23,21 @@ class EmployeeInput {
   @Field()
   photoUrl: string;
 }
+
+@InputType()
+class EmployeeUpdateInput {
+  @Field(() => String, { nullable: true })
+  firstName?: string;
+
+  @Field(() => String, { nullable: true })
+  lastName?: string;
+
+  @Field(() => String, { nullable: true })
+  title?: string;
+
+  @Field(() => String, { nullable: true })
+  photoUrl?: string;
+}
 @Resolver()
 export class EmployeeResolver {
   @Query(() => [Employee])
@@ -27,5 +50,14 @@ export class EmployeeResolver {
     @Arg("options", () => EmployeeInput) options: EmployeeInput
   ): Promise<Employee> {
     return await Employee.create(options).save();
+  }
+
+  @Mutation(() => Boolean)
+  async updateEmployee(
+    @Arg("id", () => Int) id: number,
+    @Arg("options", () => EmployeeUpdateInput) options: EmployeeUpdateInput
+  ) {
+    await Employee.update({ id }, options);
+    return true;
   }
 }
