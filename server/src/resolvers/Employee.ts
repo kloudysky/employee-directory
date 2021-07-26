@@ -73,7 +73,7 @@ export class EmployeeResolver {
   }
 
   @Mutation(() => Boolean)
-  async deleteEmployee(@Arg("id", () => Int) id: number) {
+  async deleteEmployee(@Arg("id", () => Int) id: number): Promise<boolean> {
     await Employee.delete({ id });
     return true;
   }
