@@ -46,7 +46,7 @@ export class EmployeeResolver {
   }
 
   @Query(() => Employee)
-  employee(@Arg("id", () => Int) id: number) {
+  employee(@Arg("id", () => Int) id: number): Promise<Employee | undefined> {
     return Employee.findOne(id);
   }
 
@@ -57,13 +57,13 @@ export class EmployeeResolver {
     return await Employee.create(options).save();
   }
 
-  @Mutation(() => Boolean)
+  @Mutation(() => Employee)
   async updateEmployee(
     @Arg("id", () => Int) id: number,
     @Arg("options", () => EmployeeUpdateInput) options: EmployeeUpdateInput
-  ) {
+  ): Promise<Employee | undefined> {
     await Employee.update({ id }, options);
-    return true;
+    return Employee.findOne(id);
   }
 
   @Mutation(() => Boolean)
