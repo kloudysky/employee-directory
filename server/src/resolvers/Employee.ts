@@ -5,6 +5,7 @@ import {
   InputType,
   Int,
   Mutation,
+  ObjectType,
   Query,
   Resolver,
 } from "type-graphql";
@@ -38,6 +39,24 @@ class EmployeeUpdateInput {
   @Field(() => String, { nullable: true })
   photoUrl?: string;
 }
+
+@ObjectType()
+class FieldError {
+  @Field()
+  field: string;
+
+  @Field()
+  message: string;
+}
+
+@ObjectType()
+class EmployeeResponse {
+  @Field(() => [FieldError], { nullable: true })
+  errors?: FieldError[];
+
+  @Field(() => Employee, { nullable: true })
+  employee?: Employee;
+}
 @Resolver()
 export class EmployeeResolver {
   @Query(() => [Employee])
@@ -50,11 +69,42 @@ export class EmployeeResolver {
     return Employee.findOne(id);
   }
 
-  @Mutation(() => Employee)
+  @Mutation(() => EmployeeResponse)
   async createEmployee(
     @Arg("options", () => EmployeeInput) options: EmployeeInput
-  ): Promise<Employee> {
-    return await Employee.create(options).save();
+  ): Promise<EmployeeResponse> {
+    if (options.firstName.length < 2) {
+      return {
+        errors: [
+          {
+            field: "firstName",
+            message: "First name must be longer than 1 character",
+          },
+        ],
+      };
+    }
+    if (options.lastName.length < 2) {
+      return {
+        errors: [
+          {
+            field: "lastName",
+            message: "Last name must be longer than 1 character",
+          },
+        ],
+      };
+    }
+    if (options.title.length <= 2) {
+      return {
+        errors: [
+          {
+            field: "title",
+            message: "Title must be longer than 2 characters",
+          },
+        ],
+      };
+    }
+    const employee = await Employee.create(options).save();
+    return { employee };
   }
 
   @Mutation(() => Employee, { nullable: true })
