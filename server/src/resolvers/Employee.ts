@@ -45,6 +45,11 @@ export class EmployeeResolver {
     return Employee.find();
   }
 
+  @Query(() => Employee)
+  employee(@Arg("id", () => Int) id: number) {
+    return Employee.findOne(id);
+  }
+
   @Mutation(() => Employee)
   async createEmployee(
     @Arg("options", () => EmployeeInput) options: EmployeeInput
