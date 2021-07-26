@@ -6,10 +6,9 @@ import { Employee } from "./entities/Employee";
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
+import cors from "cors";
 
 const main = async () => {
-  const app = express();
-
   await createConnection({
     type: "postgres",
     database: "empdir",
@@ -19,6 +18,10 @@ const main = async () => {
     synchronize: !__prod__,
     entities: [Employee],
   });
+
+  const app = express();
+
+  app.use(cors({ origin: "http://localhost:3000/", credentials: true }));
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
@@ -30,7 +33,7 @@ const main = async () => {
 
   await apolloServer.start();
 
-  apolloServer.applyMiddleware({ app });
+  apolloServer.applyMiddleware({ app, cors: false });
 
   app.listen(9999, () => {
     console.log("server started on port localhost:9999");
