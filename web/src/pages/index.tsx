@@ -7,7 +7,7 @@ import { EmployeeCard } from "../components/EmployeeCard";
 const Index = () => (
   <Container height="100vh">
     <Grid mt={10} templateColumns="repeat(5, 1fr)" gap={6}>
-      <EmployeeCard />
+      <EmployeeCard firstName="kloud" lastName="strife" />
     </Grid>
     <DarkModeSwitch />
   </Container>

@@ -16,13 +16,22 @@ import {
 import { Form, Formik } from "formik";
 import React from "react";
 
-interface FormModalProps {}
+interface FormModalProps {
+  title: string;
+  buttonName: string;
+  action: string;
+}
 
-export const FormModal: React.FC<FormModalProps> = ({ children }) => {
+export const FormModal: React.FC<FormModalProps> = ({
+  children,
+  buttonName,
+  title,
+  action,
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Button onClick={onOpen}>Open Modal</Button>
+      <Button onClick={onOpen}>{buttonName}</Button>
       <Modal
         isCentered
         onClose={onClose}
@@ -31,14 +40,14 @@ export const FormModal: React.FC<FormModalProps> = ({ children }) => {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader>{title}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>{children}</ModalBody>
           <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button variant="ghost">Secondary Action</Button>
+            <Button variant="ghost">{action}</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
