@@ -2,6 +2,7 @@ import { Box, FormControl, FormLabel, Input, Text } from "@chakra-ui/react";
 import { Formik, Form } from "formik";
 import React from "react";
 import { FormModal } from "./FormModal";
+import { InputField } from "./InputField";
 
 interface EmployeeCardProps {
   firstName: string;
@@ -35,16 +36,11 @@ export const EmployeeCard: React.FC<EmployeeCardProps> = ({
         >
           {({ values, handleChange }) => (
             <Form>
-              <FormControl>
-                <FormLabel htmlFor="firstName">First Name</FormLabel>
-                <Input
-                  value={values.firstName}
-                  onChange={handleChange}
-                  id="firstName"
-                  placeholder="First Name"
-                />
-                {/* <FormErrorMessage>{form.errors.name}</FormErrorMessage> */}
-              </FormControl>
+              <InputField
+                name="firstName"
+                placeholder="First Name"
+                label="First Name"
+              />
             </Form>
           )}
         </Formik>
