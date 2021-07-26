@@ -74,6 +74,7 @@ export class EmployeeResolver {
 
   @Mutation(() => Boolean)
   async deleteEmployee(@Arg("id", () => Int) id: number): Promise<boolean> {
+    //add try catch block
     await Employee.delete({ id });
     return true;
   }
