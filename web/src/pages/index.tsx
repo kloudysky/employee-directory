@@ -1,29 +1,31 @@
 import { Box, Grid } from "@chakra-ui/layout";
+import {
+  useDisclosure,
+  Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  transition,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Input,
+} from "@chakra-ui/react";
+import { Formik, Form } from "formik";
 import React from "react";
 import { Container } from "../components/Container";
 import { DarkModeSwitch } from "../components/DarkModeSwitch";
+import { EmployeeCard } from "../components/EmployeeCard";
+import { FormModal } from "../components/FormModal";
 
 const Index = () => (
   <Container height="100vh">
     <Grid mt={10} templateColumns="repeat(5, 1fr)" gap={6}>
-      <Box
-        maxW="lg"
-        borderWidth="1px"
-        borderRadius="lg"
-        overflow="hidden"
-        h="100"
-      >
-        Employee
-      </Box>
-      <Box
-        maxW="lg"
-        borderWidth="1px"
-        borderRadius="lg"
-        overflow="hidden"
-        h="100"
-      >
-        Employee
-      </Box>
+      <EmployeeCard />
     </Grid>
     <DarkModeSwitch />
   </Container>
