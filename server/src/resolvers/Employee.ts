@@ -62,8 +62,14 @@ export class EmployeeResolver {
     @Arg("id", () => Int) id: number,
     @Arg("options", () => EmployeeUpdateInput) options: EmployeeUpdateInput
   ): Promise<Employee | undefined> {
-    await Employee.update({ id }, options);
-    return Employee.findOne(id);
+    const employee = Employee.findOne(id);
+    if (!employee) {
+      return undefined;
+    }
+    if (typeof options !== "undefined") {
+      await Employee.update({ id }, options);
+    }
+    return employee;
   }
 
   @Mutation(() => Boolean)
