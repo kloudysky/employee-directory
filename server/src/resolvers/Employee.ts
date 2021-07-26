@@ -60,4 +60,10 @@ export class EmployeeResolver {
     await Employee.update({ id }, options);
     return true;
   }
+
+  @Mutation(() => Boolean)
+  async deleteEmployee(@Arg("id", () => Int) id: number) {
+    await Employee.delete({ id });
+    return true;
+  }
 }
