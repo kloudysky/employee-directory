@@ -1,9 +1,5 @@
 import {
   Button,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Input,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -13,7 +9,6 @@ import {
   ModalOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
-import { Form, Formik } from "formik";
 import React from "react";
 
 interface FormModalProps {
