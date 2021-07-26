@@ -1,4 +1,4 @@
-import { FormControl, FormLabel, Input } from "@chakra-ui/react";
+import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import { Formik, Form } from "formik";
 import React from "react";
 import { FormModal } from "./FormModal";
@@ -37,6 +37,7 @@ export const CreateEmployeeModal: React.FC<CreateEmployeeModalProps> = ({}) => {
               placeholder="Photo URL"
               label="Photo URL"
             />
+            <Button type="submit">Submit</Button>
           </Form>
         )}
       </Formik>
