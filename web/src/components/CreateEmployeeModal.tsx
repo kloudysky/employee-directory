@@ -43,7 +43,9 @@ export const CreateEmployeeModal: React.FC<CreateEmployeeModalProps> = ({}) => {
               placeholder="Photo URL"
               label="Photo URL"
             />
-            <Button type="submit">Submit</Button>
+            <Button mt={5} mb={5} type="submit">
+              Submit
+            </Button>
           </Form>
         )}
       </Formik>

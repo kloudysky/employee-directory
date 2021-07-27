@@ -38,12 +38,6 @@ export const FormModal: React.FC<FormModalProps> = ({
           <ModalHeader>{title}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>{children}</ModalBody>
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
-            </Button>
-            <Button variant="ghost">{action}</Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>
