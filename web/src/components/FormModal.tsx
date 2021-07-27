@@ -6,6 +6,7 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
+  useColorMode,
   useDisclosure,
 } from "@chakra-ui/react";
 import React from "react";
@@ -21,6 +22,11 @@ export const FormModal: React.FC<FormModalProps> = ({
   title,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const { colorMode } = useColorMode();
+
+  const color = { light: "black", dark: "white" };
+
   return (
     <>
       <Button onClick={onOpen}>{buttonName}</Button>
@@ -32,7 +38,7 @@ export const FormModal: React.FC<FormModalProps> = ({
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>{title}</ModalHeader>
+          <ModalHeader color={color[colorMode]}>{title}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>{children}</ModalBody>
         </ModalContent>

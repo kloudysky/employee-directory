@@ -3,6 +3,7 @@ import {
   FormLabel,
   Input,
   FormErrorMessage,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useField } from "formik";
 import React from "react";
@@ -19,9 +20,16 @@ export const InputField: React.FC<InputFieldProps> = ({
   ...props
 }) => {
   const [field, { error }] = useField(props);
+
+  const { colorMode } = useColorMode();
+
+  const color = { light: "black", dark: "white" };
+
   return (
     <FormControl isInvalid={!!error}>
-      <FormLabel htmlFor={field.name}>{label}</FormLabel>
+      <FormLabel color={color[colorMode]} htmlFor={field.name}>
+        {label}
+      </FormLabel>
       <Input
         {...field}
         {...props}
