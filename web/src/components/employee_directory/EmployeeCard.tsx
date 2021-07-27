@@ -1,14 +1,15 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text, useDisclosure } from "@chakra-ui/react";
 import { Formik, Form } from "formik";
 import React from "react";
-import { FormModal } from "./FormModal";
-import { InputField } from "./InputField";
+import { FormModal } from "../FormModal";
+import { InputField } from "../InputField";
 
 interface EmployeeCardProps {
   employee;
 }
 
 export const EmployeeCard: React.FC<EmployeeCardProps> = ({ employee }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { id, firstName, lastName, title, department, state, photoUrl } =
     employee;
 
@@ -26,7 +27,13 @@ export const EmployeeCard: React.FC<EmployeeCardProps> = ({ employee }) => {
         <Text>Title: {title}</Text>
         <Text>Department: {department}</Text>
         <Text>Location: {state}</Text>
-        <FormModal title="Update Employee Details" buttonName="Update">
+        <FormModal
+          isOpen={isOpen}
+          onOpen={onOpen}
+          onClose={onClose}
+          title="Update Employee Details"
+          buttonName="Update"
+        >
           <Formik
             initialValues={{ firstName, lastName }}
             onSubmit={(values) => {

@@ -1,6 +1,6 @@
 import { Box, Flex, useColorMode } from "@chakra-ui/react";
 import React from "react";
-import { CreateEmployeeModal } from "./CreateEmployeeModal";
+import { CreateEmployeeModal } from "./employee_directory/CreateEmployeeModal";
 import { DarkModeSwitch } from "./DarkModeSwitch";
 
 interface NavBarProps {}

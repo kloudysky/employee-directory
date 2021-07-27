@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "../components/Container";
-import { Directory } from "../components/Directory";
+import { Directory } from "../components/employee_directory/Directory";
 import { NavBar } from "../components/NavBar";
 import { useEmployeesQuery } from "../generated/graphql";
 

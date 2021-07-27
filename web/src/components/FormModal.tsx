@@ -14,15 +14,19 @@ import React from "react";
 interface FormModalProps {
   title: string;
   buttonName: string;
+  isOpen;
+  onOpen;
+  onClose;
 }
 
 export const FormModal: React.FC<FormModalProps> = ({
   children,
   buttonName,
   title,
+  isOpen,
+  onOpen,
+  onClose,
 }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   const { colorMode } = useColorMode();
 
   const color = { light: "black", dark: "white" };

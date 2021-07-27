@@ -1,10 +1,10 @@
 import { Button, useDisclosure } from "@chakra-ui/react";
 import { Formik, Form } from "formik";
 import React from "react";
-import { useCreateEmployeeMutation } from "../generated/graphql";
-import { toErrorMap } from "../utils/toErrorsMap";
-import { FormModal } from "./FormModal";
-import { InputField } from "./InputField";
+import { useCreateEmployeeMutation } from "../../generated/graphql";
+import { toErrorMap } from "../../utils/toErrorsMap";
+import { FormModal } from "../FormModal";
+import { InputField } from "../InputField";
 
 interface CreateEmployeeModalProps {}
 
@@ -13,7 +13,13 @@ export const CreateEmployeeModal: React.FC<CreateEmployeeModalProps> = ({}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <FormModal title="Create an Employee" buttonName="Add Employee">
+    <FormModal
+      isOpen={isOpen}
+      onOpen={onOpen}
+      onClose={onClose}
+      title="Create an Employee"
+      buttonName="Add Employee"
+    >
       <Formik
         initialValues={{
           firstName: "",
@@ -28,7 +34,7 @@ export const CreateEmployeeModal: React.FC<CreateEmployeeModalProps> = ({}) => {
           if (response.data?.createEmployee.errors) {
             setErrors(toErrorMap(response.data.createEmployee.errors));
           } else if (response.data?.createEmployee.employee) {
-            console.log(response.data, onClose());
+            onClose();
           }
         }}
       >
