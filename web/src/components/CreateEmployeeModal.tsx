@@ -1,8 +1,8 @@
-import { gql, useMutation } from "@apollo/client";
-import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { Formik, Form } from "formik";
 import React from "react";
 import { useCreateEmployeeMutation } from "../generated/graphql";
+import { toErrorMap } from "../utils/toErrorsMap";
 import { FormModal } from "./FormModal";
 import { InputField } from "./InputField";
 
@@ -18,9 +18,11 @@ export const CreateEmployeeModal: React.FC<CreateEmployeeModalProps> = ({}) => {
     >
       <Formik
         initialValues={{ firstName: "", lastName: "", title: "", photoUrl: "" }}
-        onSubmit={async (values) => {
-          console.log(values);
+        onSubmit={async (values, { setErrors }) => {
           const response = await createEmployee({ variables: values });
+          if (response.data?.createEmployee.errors) {
+            setErrors(toErrorMap(response.data.createEmployee.errors));
+          }
         }}
       >
         {({ values, handleChange }) => (
