@@ -5,23 +5,24 @@ import { useCreateEmployeeMutation } from "../generated/graphql";
 import { toErrorMap } from "../utils/toErrorsMap";
 import { FormModal } from "./FormModal";
 import { InputField } from "./InputField";
+import { useRouter } from "next/router";
 
 interface CreateEmployeeModalProps {}
 
 export const CreateEmployeeModal: React.FC<CreateEmployeeModalProps> = ({}) => {
+  const router = useRouter();
   const [createEmployee] = useCreateEmployeeMutation();
   return (
-    <FormModal
-      title="Create an Employee"
-      action="Submit"
-      buttonName="Add Employee"
-    >
+    <FormModal title="Create an Employee" buttonName="Add Employee">
       <Formik
         initialValues={{ firstName: "", lastName: "", title: "", photoUrl: "" }}
         onSubmit={async (values, { setErrors }) => {
           const response = await createEmployee({ variables: values });
           if (response.data?.createEmployee.errors) {
             setErrors(toErrorMap(response.data.createEmployee.errors));
+          } else if (response.data?.createEmployee.employee) {
+            console.log(response.data);
+            //exit modal
           }
         }}
       >

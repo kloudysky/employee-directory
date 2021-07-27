@@ -14,14 +14,12 @@ import React from "react";
 interface FormModalProps {
   title: string;
   buttonName: string;
-  action: string;
 }
 
 export const FormModal: React.FC<FormModalProps> = ({
   children,
   buttonName,
   title,
-  action,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
