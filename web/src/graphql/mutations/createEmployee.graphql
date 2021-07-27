@@ -1,0 +1,27 @@
+mutation CreateEmployee(
+  $firstName: String!
+  $lastName: String!
+  $title: String!
+  $photoUrl: String!
+) {
+  createEmployee(
+    options: {
+      firstName: $firstName
+      lastName: $lastName
+      title: $title
+      photoUrl: $photoUrl
+    }
+  ) {
+    errors {
+      field
+      message
+    }
+    employee {
+      id
+      firstName
+      lastName
+      title
+      photoUrl
+    }
+  }
+}
