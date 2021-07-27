@@ -14,13 +14,7 @@ export const EmployeeCard: React.FC<EmployeeCardProps> = ({ employee }) => {
     employee;
 
   return (
-    <Box
-      maxW="lg"
-      borderWidth="1px"
-      borderRadius="lg"
-      overflow="hidden"
-      h="200"
-    >
+    <Box maxW="200px" borderWidth="1px" borderRadius="md" height="200px">
       <Flex p={15} flexDirection="column">
         <Text>First Name: {firstName}</Text>
         <Text>Last Name: {lastName}</Text>

@@ -8,8 +8,8 @@ export const Container = (props) => {
   const color = { light: "black", dark: "white" };
   return (
     <Flex
+      overflow="scroll"
       direction="column"
-      alignItems="center"
       // justifyContent="flex-start"
       bg={bgColor[colorMode]}
       color={color[colorMode]}
