@@ -115,6 +115,17 @@ export type CreateEmployeeMutation = (
   ) }
 );
 
+export type EmployeesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type EmployeesQuery = (
+  { __typename?: 'Query' }
+  & { employees: Array<(
+    { __typename?: 'Employee' }
+    & EmployeeFragment
+  )> }
+);
+
 export const EmployeeFragmentDoc = gql`
     fragment Employee on Employee {
   id
@@ -170,3 +181,37 @@ export function useCreateEmployeeMutation(baseOptions?: Apollo.MutationHookOptio
 export type CreateEmployeeMutationHookResult = ReturnType<typeof useCreateEmployeeMutation>;
 export type CreateEmployeeMutationResult = Apollo.MutationResult<CreateEmployeeMutation>;
 export type CreateEmployeeMutationOptions = Apollo.BaseMutationOptions<CreateEmployeeMutation, CreateEmployeeMutationVariables>;
+export const EmployeesDocument = gql`
+    query Employees {
+  employees {
+    ...Employee
+  }
+}
+    ${EmployeeFragmentDoc}`;
+
+/**
+ * __useEmployeesQuery__
+ *
+ * To run a query within a React component, call `useEmployeesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useEmployeesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useEmployeesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useEmployeesQuery(baseOptions?: Apollo.QueryHookOptions<EmployeesQuery, EmployeesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<EmployeesQuery, EmployeesQueryVariables>(EmployeesDocument, options);
+      }
+export function useEmployeesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<EmployeesQuery, EmployeesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<EmployeesQuery, EmployeesQueryVariables>(EmployeesDocument, options);
+        }
+export type EmployeesQueryHookResult = ReturnType<typeof useEmployeesQuery>;
+export type EmployeesLazyQueryHookResult = ReturnType<typeof useEmployeesLazyQuery>;
+export type EmployeesQueryResult = Apollo.QueryResult<EmployeesQuery, EmployeesQueryVariables>;
