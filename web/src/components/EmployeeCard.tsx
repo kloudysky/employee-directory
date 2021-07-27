@@ -30,11 +30,7 @@ export const EmployeeCard: React.FC<EmployeeCardProps> = ({
     >
       <Text>{firstName}</Text>
       <Text>{lastName}</Text>
-      <FormModal
-        title="Update Employee Details"
-        action="Update"
-        buttonName="Update"
-      >
+      <FormModal title="Update Employee Details" buttonName="Update">
         <Formik
           initialValues={{ firstName, lastName }}
           onSubmit={(values) => {
