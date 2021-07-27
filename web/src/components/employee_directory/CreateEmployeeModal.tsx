@@ -1,3 +1,4 @@
+import { useApolloClient } from "@apollo/client";
 import { Button, useDisclosure } from "@chakra-ui/react";
 import { Formik, Form } from "formik";
 import React from "react";
@@ -11,6 +12,7 @@ interface CreateEmployeeModalProps {}
 export const CreateEmployeeModal: React.FC<CreateEmployeeModalProps> = ({}) => {
   const [createEmployee] = useCreateEmployeeMutation();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const apolloClient = useApolloClient();
 
   return (
     <FormModal
@@ -34,6 +36,7 @@ export const CreateEmployeeModal: React.FC<CreateEmployeeModalProps> = ({}) => {
           if (response.data?.createEmployee.errors) {
             setErrors(toErrorMap(response.data.createEmployee.errors));
           } else if (response.data?.createEmployee.employee) {
+            await apolloClient.resetStore();
             onClose();
           }
         }}
