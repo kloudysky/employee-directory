@@ -3,6 +3,8 @@ fragment Employee on Employee {
   firstName
   lastName
   title
+  department
+  state
   photoUrl
   updatedAt
   createdAt

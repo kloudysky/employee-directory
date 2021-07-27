@@ -17,7 +17,7 @@ interface EmployeeCardProps {
 }
 
 export const EmployeeCard: React.FC<EmployeeCardProps> = ({ employee }) => {
-  const { firstName, lastName, title, photoUrl } = employee;
+  const { firstName, lastName, title, department, state, photoUrl } = employee;
   return (
     <Box
       maxW="lg"
@@ -30,6 +30,8 @@ export const EmployeeCard: React.FC<EmployeeCardProps> = ({ employee }) => {
         <Text>First Name: {firstName}</Text>
         <Text>Last Name: {lastName}</Text>
         <Text>Title: {title}</Text>
+        <Text>Department: {department}</Text>
+        <Text>Location: {state}</Text>
         <FormModal title="Update Employee Details" buttonName="Update">
           <Formik
             initialValues={{ firstName, lastName }}

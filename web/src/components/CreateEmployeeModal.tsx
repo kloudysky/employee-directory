@@ -15,7 +15,14 @@ export const CreateEmployeeModal: React.FC<CreateEmployeeModalProps> = ({}) => {
   return (
     <FormModal title="Create an Employee" buttonName="Add Employee">
       <Formik
-        initialValues={{ firstName: "", lastName: "", title: "", photoUrl: "" }}
+        initialValues={{
+          firstName: "",
+          lastName: "",
+          title: "",
+          photoUrl: "",
+          department: "",
+          state: "",
+        }}
         onSubmit={async (values, { setErrors }) => {
           const response = await createEmployee({ variables: values });
           if (response.data?.createEmployee.errors) {
@@ -38,6 +45,12 @@ export const CreateEmployeeModal: React.FC<CreateEmployeeModalProps> = ({}) => {
               label="Last Name"
             />
             <InputField name="title" placeholder="Title" label="Title" />
+            <InputField
+              name="department"
+              placeholder="Department"
+              label="Department"
+            />
+            <InputField name="state" placeholder="State" label="State" />
             <InputField
               name="photoUrl"
               placeholder="Photo URL"

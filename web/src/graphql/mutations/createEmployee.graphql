@@ -2,6 +2,8 @@ mutation CreateEmployee(
   $firstName: String!
   $lastName: String!
   $title: String!
+  $department: String!
+  $state: String!
   $photoUrl: String!
 ) {
   createEmployee(
@@ -9,6 +11,8 @@ mutation CreateEmployee(
       firstName: $firstName
       lastName: $lastName
       title: $title
+      department: $department
+      state: $state
       photoUrl: $photoUrl
     }
   ) {

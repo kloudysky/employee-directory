@@ -22,6 +22,12 @@ class EmployeeInput {
   title: string;
 
   @Field()
+  department: string;
+
+  @Field()
+  state: string;
+
+  @Field()
   photoUrl: string;
 }
 
@@ -35,6 +41,12 @@ class EmployeeUpdateInput {
 
   @Field(() => String, { nullable: true })
   title?: string;
+
+  @Field(() => String, { nullable: true })
+  department?: string;
+
+  @Field(() => String, { nullable: true })
+  state?: string;
 
   @Field(() => String, { nullable: true })
   photoUrl?: string;

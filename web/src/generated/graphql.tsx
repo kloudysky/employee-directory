@@ -23,6 +23,8 @@ export type Employee = {
   firstName: Scalars['String'];
   lastName: Scalars['String'];
   title: Scalars['String'];
+  department: Scalars['String'];
+  state: Scalars['String'];
   photoUrl: Scalars['String'];
   createdAt: Scalars['DateTime'];
   updatedAt: Scalars['DateTime'];
@@ -32,6 +34,8 @@ export type EmployeeInput = {
   firstName: Scalars['String'];
   lastName: Scalars['String'];
   title: Scalars['String'];
+  department: Scalars['String'];
+  state: Scalars['String'];
   photoUrl: Scalars['String'];
 };
 
@@ -45,6 +49,8 @@ export type EmployeeUpdateInput = {
   firstName?: Maybe<Scalars['String']>;
   lastName?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
+  department?: Maybe<Scalars['String']>;
+  state?: Maybe<Scalars['String']>;
   photoUrl?: Maybe<Scalars['String']>;
 };
 
@@ -90,13 +96,15 @@ export type QueryEmployeeArgs = {
 
 export type EmployeeFragment = (
   { __typename?: 'Employee' }
-  & Pick<Employee, 'id' | 'firstName' | 'lastName' | 'title' | 'photoUrl' | 'updatedAt' | 'createdAt'>
+  & Pick<Employee, 'id' | 'firstName' | 'lastName' | 'title' | 'department' | 'state' | 'photoUrl' | 'updatedAt' | 'createdAt'>
 );
 
 export type CreateEmployeeMutationVariables = Exact<{
   firstName: Scalars['String'];
   lastName: Scalars['String'];
   title: Scalars['String'];
+  department: Scalars['String'];
+  state: Scalars['String'];
   photoUrl: Scalars['String'];
 }>;
 
@@ -132,15 +140,17 @@ export const EmployeeFragmentDoc = gql`
   firstName
   lastName
   title
+  department
+  state
   photoUrl
   updatedAt
   createdAt
 }
     `;
 export const CreateEmployeeDocument = gql`
-    mutation CreateEmployee($firstName: String!, $lastName: String!, $title: String!, $photoUrl: String!) {
+    mutation CreateEmployee($firstName: String!, $lastName: String!, $title: String!, $department: String!, $state: String!, $photoUrl: String!) {
   createEmployee(
-    options: {firstName: $firstName, lastName: $lastName, title: $title, photoUrl: $photoUrl}
+    options: {firstName: $firstName, lastName: $lastName, title: $title, department: $department, state: $state, photoUrl: $photoUrl}
   ) {
     errors {
       field
@@ -170,6 +180,8 @@ export type CreateEmployeeMutationFn = Apollo.MutationFunction<CreateEmployeeMut
  *      firstName: // value for 'firstName'
  *      lastName: // value for 'lastName'
  *      title: // value for 'title'
+ *      department: // value for 'department'
+ *      state: // value for 'state'
  *      photoUrl: // value for 'photoUrl'
  *   },
  * });
