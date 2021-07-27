@@ -18,8 +18,6 @@ export const Index: React.FC = () => {
 
   return (
     <>
-      {console.log(employees)}
-
       <NavBar />
       <Container height="100vh">
         <Directory employees={employees as []} />
