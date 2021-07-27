@@ -1,27 +1,28 @@
-import { Grid } from "@chakra-ui/layout";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "../components/Container";
-import { CreateEmployeeModal } from "../components/CreateEmployeeModal";
-import { DarkModeSwitch } from "../components/DarkModeSwitch";
-import { EmployeeCard } from "../components/EmployeeCard";
+import { Directory } from "../components/Directory";
 import { NavBar } from "../components/NavBar";
 import { useEmployeesQuery } from "../generated/graphql";
 
-export interface IndexState {}
-
-export const Index: React.FC<IndexState> = ({}) => {
+export const Index: React.FC = () => {
   const { data, loading } = useEmployeesQuery();
+  const [employees, setEmployees] = useState([]);
+
+  useEffect(() => {
+    if (loading === false && data) {
+      setEmployees(data.employees);
+    }
+  }, [loading, data]);
+
+  if (loading) return <div>Loading...</div>;
+
   return (
     <>
+      {console.log(employees)}
+
       <NavBar />
       <Container height="100vh">
-        <Grid mt={10} templateColumns="repeat(5, 1fr)" gap={6}>
-          {!data
-            ? null
-            : data.employees.map((employee) => (
-                <EmployeeCard employee={employee} />
-              ))}
-        </Grid>
+        <Directory employees={employees as []} />
       </Container>
     </>
   );

@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  FormControl,
-  FormLabel,
-  Input,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import { Formik, Form } from "formik";
 import React from "react";
 import { FormModal } from "./FormModal";
@@ -17,7 +9,9 @@ interface EmployeeCardProps {
 }
 
 export const EmployeeCard: React.FC<EmployeeCardProps> = ({ employee }) => {
-  const { firstName, lastName, title, department, state, photoUrl } = employee;
+  const { id, firstName, lastName, title, department, state, photoUrl } =
+    employee;
+
   return (
     <Box
       maxW="lg"
