@@ -17,11 +17,7 @@ mutation CreateEmployee(
       message
     }
     employee {
-      id
-      firstName
-      lastName
-      title
-      photoUrl
+      ...Employee
     }
   }
 }

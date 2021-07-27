@@ -88,6 +88,11 @@ export type QueryEmployeeArgs = {
   id: Scalars['Int'];
 };
 
+export type EmployeeFragment = (
+  { __typename?: 'Employee' }
+  & Pick<Employee, 'id' | 'firstName' | 'lastName' | 'title' | 'photoUrl' | 'updatedAt' | 'createdAt'>
+);
+
 export type CreateEmployeeMutationVariables = Exact<{
   firstName: Scalars['String'];
   lastName: Scalars['String'];
@@ -105,12 +110,22 @@ export type CreateEmployeeMutation = (
       & Pick<FieldError, 'field' | 'message'>
     )>>, employee?: Maybe<(
       { __typename?: 'Employee' }
-      & Pick<Employee, 'id' | 'firstName' | 'lastName' | 'title' | 'photoUrl'>
+      & EmployeeFragment
     )> }
   ) }
 );
 
-
+export const EmployeeFragmentDoc = gql`
+    fragment Employee on Employee {
+  id
+  firstName
+  lastName
+  title
+  photoUrl
+  updatedAt
+  createdAt
+}
+    `;
 export const CreateEmployeeDocument = gql`
     mutation CreateEmployee($firstName: String!, $lastName: String!, $title: String!, $photoUrl: String!) {
   createEmployee(
@@ -121,15 +136,11 @@ export const CreateEmployeeDocument = gql`
       message
     }
     employee {
-      id
-      firstName
-      lastName
-      title
-      photoUrl
+      ...Employee
     }
   }
 }
-    `;
+    ${EmployeeFragmentDoc}`;
 export type CreateEmployeeMutationFn = Apollo.MutationFunction<CreateEmployeeMutation, CreateEmployeeMutationVariables>;
 
 /**
