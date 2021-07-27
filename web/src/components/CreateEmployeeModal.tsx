@@ -1,17 +1,17 @@
-import { Button } from "@chakra-ui/react";
+import { Button, useDisclosure } from "@chakra-ui/react";
 import { Formik, Form } from "formik";
 import React from "react";
 import { useCreateEmployeeMutation } from "../generated/graphql";
 import { toErrorMap } from "../utils/toErrorsMap";
 import { FormModal } from "./FormModal";
 import { InputField } from "./InputField";
-import { useRouter } from "next/router";
 
 interface CreateEmployeeModalProps {}
 
 export const CreateEmployeeModal: React.FC<CreateEmployeeModalProps> = ({}) => {
-  const router = useRouter();
   const [createEmployee] = useCreateEmployeeMutation();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <FormModal title="Create an Employee" buttonName="Add Employee">
       <Formik
@@ -21,8 +21,7 @@ export const CreateEmployeeModal: React.FC<CreateEmployeeModalProps> = ({}) => {
           if (response.data?.createEmployee.errors) {
             setErrors(toErrorMap(response.data.createEmployee.errors));
           } else if (response.data?.createEmployee.employee) {
-            console.log(response.data);
-            //exit modal
+            console.log(response.data, onClose());
           }
         }}
       >

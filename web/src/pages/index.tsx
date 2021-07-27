@@ -19,10 +19,7 @@ export const Index: React.FC<IndexState> = ({}) => {
           {!data
             ? null
             : data.employees.map((employee) => (
-                <EmployeeCard
-                  firstName={employee.firstName}
-                  lastName={employee.lastName}
-                />
+                <EmployeeCard employee={employee} />
               ))}
         </Grid>
       </Container>

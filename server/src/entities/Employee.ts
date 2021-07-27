@@ -29,6 +29,14 @@ export class Employee extends BaseEntity {
 
   @Field()
   @Column()
+  department: string;
+
+  @Field()
+  @Column()
+  state: string;
+
+  @Field()
+  @Column({ nullable: true })
   photoUrl: string;
 
   @Field()

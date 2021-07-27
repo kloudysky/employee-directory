@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Flex,
   FormControl,
   FormLabel,
   Input,
@@ -12,42 +13,42 @@ import { FormModal } from "./FormModal";
 import { InputField } from "./InputField";
 
 interface EmployeeCardProps {
-  firstName: string;
-  lastName: string;
+  employee;
 }
 
-export const EmployeeCard: React.FC<EmployeeCardProps> = ({
-  firstName,
-  lastName,
-}) => {
+export const EmployeeCard: React.FC<EmployeeCardProps> = ({ employee }) => {
+  const { firstName, lastName, title, photoUrl } = employee;
   return (
     <Box
       maxW="lg"
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
-      h="100"
+      h="200"
     >
-      <Text>{firstName}</Text>
-      <Text>{lastName}</Text>
-      <FormModal title="Update Employee Details" buttonName="Update">
-        <Formik
-          initialValues={{ firstName, lastName }}
-          onSubmit={(values) => {
-            console.log(values);
-          }}
-        >
-          {({ values, handleChange }) => (
-            <Form>
-              <InputField
-                name="firstName"
-                placeholder="First Name"
-                label="First Name"
-              />
-            </Form>
-          )}
-        </Formik>
-      </FormModal>
+      <Flex p={15} flexDirection="column">
+        <Text>First Name: {firstName}</Text>
+        <Text>Last Name: {lastName}</Text>
+        <Text>Title: {title}</Text>
+        <FormModal title="Update Employee Details" buttonName="Update">
+          <Formik
+            initialValues={{ firstName, lastName }}
+            onSubmit={(values) => {
+              console.log(values);
+            }}
+          >
+            {({ values, handleChange }) => (
+              <Form>
+                <InputField
+                  name="firstName"
+                  placeholder="First Name"
+                  label="First Name"
+                />
+              </Form>
+            )}
+          </Formik>
+        </FormModal>
+      </Flex>
     </Box>
   );
 };

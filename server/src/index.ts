@@ -15,6 +15,7 @@ const main = async () => {
     username: "postgres",
     password: "postgres",
     logging: !__prod__,
+    // dropSchema: true,
     synchronize: !__prod__,
     entities: [Employee],
   });
