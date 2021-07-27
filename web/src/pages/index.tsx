@@ -9,7 +9,7 @@ export const Index: React.FC = () => {
   const [employees, setEmployees] = useState([]);
 
   useEffect(() => {
-    if (loading === false && data) {
+    if (!loading && data) {
       setEmployees(data.employees);
     }
   }, [loading, data]);
