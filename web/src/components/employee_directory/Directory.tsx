@@ -8,7 +8,7 @@ interface DirectoryProps {
 
 export const Directory: React.FC<DirectoryProps> = ({ employees }) => {
   return (
-    <SimpleGrid p={10} minChildWidth="200px" spacing="10px">
+    <SimpleGrid p={10} minChildWidth="230px" spacing="10px">
       {employees.map((employee) => (
         <EmployeeCard key={employee.id} employee={employee} />
       ))}

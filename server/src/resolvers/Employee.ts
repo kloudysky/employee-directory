@@ -115,6 +115,22 @@ export class EmployeeResolver {
         ],
       };
     }
+    if (
+      options.photoUrl.length > 0 &&
+      options.photoUrl.match(/\.(jpeg|jpg|gif|png)$/) === null
+    ) {
+      return {
+        errors: [
+          {
+            field: "photoUrl",
+            message: "You must enter a valid image address or leave blank",
+          },
+        ],
+      };
+    } else {
+      options.photoUrl =
+        "https://www.kindpng.com/picc/m/22-223863_no-avatar-png-circle-transparent-png.png";
+    }
     const employee = await Employee.create(options).save();
     return { employee };
   }

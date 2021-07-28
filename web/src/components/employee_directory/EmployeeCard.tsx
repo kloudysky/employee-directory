@@ -1,4 +1,11 @@
-import { Box, Flex, Text, useDisclosure } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Text,
+  useDisclosure,
+  Image,
+  useColorMode,
+} from "@chakra-ui/react";
 import { Formik, Form } from "formik";
 import React from "react";
 import { FormModal } from "../FormModal";
@@ -13,8 +20,26 @@ export const EmployeeCard: React.FC<EmployeeCardProps> = ({ employee }) => {
   const { id, firstName, lastName, title, department, state, photoUrl } =
     employee;
 
+  const { colorMode } = useColorMode();
+
+  const bgColor = { light: "gray.60", dark: "gray.800" };
+
+  const borderColor = { light: "gray.300", dark: "gray.600" };
+
+  const color = { light: "black", dark: "white" };
+
   return (
-    <Box maxW="200px" borderWidth="1px" borderRadius="md" height="200px">
+    <Box
+      bgColor={bgColor[colorMode]}
+      borderColor={borderColor[colorMode]}
+      maxW="225px"
+      borderWidth="1px"
+      borderRadius="md"
+      height="430px"
+      onClick={onOpen}
+      cursor={"pointer"}
+    >
+      <Image src={photoUrl} />
       <Flex p={15} flexDirection="column">
         <Text>First Name: {firstName}</Text>
         <Text>Last Name: {lastName}</Text>
